@@ -11,6 +11,10 @@ class Nucleotide
     @nucleotide
   end
 
+  def ==(obj)
+    @nucleotide == obj.to_s
+  end
+
   def self.dna(nucleotide)
     new(nucleotide, DNA)
   end
@@ -23,12 +27,12 @@ class DNA
   end
 
   def count(nucleotide)
-    nucleotide_counts[Nucleotide.new(nucleotide).to_s] || 0
+    @nucleotides.count(Nucleotide.new(nucleotide))
   end
 
   def nucleotide_counts
-    @counts ||= @nucleotides.each_with_object({'A' => 0, 'T' => 0, 'C' => 0, 'G' => 0}) do |n, counts|
-      counts[n.to_s] += 1
+    Nucleotide::DNA.each_with_object(Hash.new(0)) do |nucleotide, counts|
+      counts[nucleotide] = count(nucleotide)
     end
   end
 
