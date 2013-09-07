@@ -1,19 +1,19 @@
 (ns bob
-  (:require [clojure.string :as string]))
+  (:require [clojure.string :refer [blank? upper-case]]))
 
-(defn silent [message]
-  (string/blank? message))
+(defn- silent? [message]
+  (blank? message))
 
-(defn shouted [message]
-  (and (not (silent message)) (= message (string/upper-case message))))
+(defn- shouted? [message]
+  (= message (upper-case message)))
 
-(defn question [message]
+(defn- question? [message]
   (= \? (last message)))
 
 (defn response-for[message]
  (cond
-   (shouted message) "Woah, chill out!"
-   (question message) "Sure."
-   (silent message) "Fine. Be that way!"
+   (silent? message) "Fine. Be that way!"
+   (shouted? message) "Woah, chill out!"
+   (question? message) "Sure."
    :else "Whatever."))
 
