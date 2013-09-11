@@ -18,7 +18,7 @@ class PhoneNumber
 private
   
   def sanitise(number)
-    valid_number(excluding_valid_prefix(to_digits(number)))
+    to_valid_number(excluding_valid_prefix(to_digits(number)))
   end
 
   def to_digits(number)
@@ -26,14 +26,14 @@ private
   end
 
   def excluding_valid_prefix(digits)
-    valid_prefix(digits) ? digits[1..10] : digits
+    valid_prefix?(digits) ? digits[1..10] : digits
   end
 
-  def valid_number(digits)
+  def to_valid_number(digits)
     digits.length == 10 ? digits : INVALID_NUMBER_REPLACEMENT
   end
 
-  def valid_prefix(digits)
+  def valid_prefix?(digits)
     digits.length == 11 && digits.start_with?('1')
   end
 end
