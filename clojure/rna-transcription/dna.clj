@@ -1,10 +1,10 @@
-(ns dna)
-
-(defn- thymidine-to-uracil [n]
-  (if (= n \T) \U n))
+(ns dna
+  (:require [clojure.string :as string]))
 
 (defn to-rna [strand]
-  (apply str (map thymidine-to-uracil strand)))
+  (let [thymidine "T"
+        uracil "U"]
+  (string/replace strand thymidine uracil)))
 
 
 
