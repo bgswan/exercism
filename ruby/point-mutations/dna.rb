@@ -5,7 +5,7 @@ class DNA
   end
 
   def hamming_distance(other)
-    pairs(@strand, other).reject(&matches).length
+    pairs(@strand, other).count(&non_matching)
   end
 
   private
@@ -18,7 +18,7 @@ class DNA
     strand.chars.to_a[0...length]
   end
 
-  def matches
-    lambda{|pair| pair[0] == pair[1]}
+  def non_matching
+    lambda{|pair| pair[0] != pair[1]}
   end
 end
