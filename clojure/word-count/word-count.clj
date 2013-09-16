@@ -1,7 +1,6 @@
 (ns phrase
-  (:require [clojure.string :refer [split lower-case blank?]]))
+  (:require [clojure.string :refer [split lower-case]]))
 
 (defn word-count [phrase]
-  (let [tokens (split (lower-case phrase) #"\W")
-        words (remove blank? tokens)]
+  (let [words (split (lower-case phrase) #"\W+")]
   (frequencies words)))
