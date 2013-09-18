@@ -3,4 +3,4 @@
 
 (defn word-count [phrase]
   (let [words (split (lower-case phrase) #"\W+")]
-  (frequencies words)))
+    (frequencies words)))
