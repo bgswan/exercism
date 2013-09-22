@@ -2,5 +2,5 @@
   (:require [clojure.string :refer [split lower-case]]))
 
 (defn word-count [phrase]
-  (let [words (split (lower-case phrase) #"\W+")]
+  (let [words (re-seq #"\w+" (lower-case phrase))]
     (frequencies words)))
